@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask Calculator</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="{{ theme }}">
+
+<div class="container">
+
+    <div class="calculator">
+
+        <h1>Calculator</h1>
+
+        <div class="theme-picker">
+            <a class="dark-btn" href="/theme/dark"></a>
+            <a class="light-btn" href="/theme/light"></a>
+            <a class="blue-btn" href="/theme/blue"></a>
+            <a class="green-btn" href="/theme/green"></a>
+            <a class="purple-btn" href="/theme/purple"></a>
+        </div>
+
+        <form method="POST">
+
+            <input
+                type="text"
+                value="{{ expression }}"
+                readonly
+                class="display">
+
+            <input
+                type="hidden"
+                name="expression"
+                value="{{ expression }}">
+
+            <div class="buttons">
+
+                <button name="button" value="7">7</button>
+                <button name="button" value="8">8</button>
+                <button name="button" value="9">9</button>
+                <button name="button" value="/">÷</button>
+
+                <button name="button" value="4">4</button>
+                <button name="button" value="5">5</button>
+                <button name="button" value="6">6</button>
+                <button name="button" value="*">×</button>
+
+                <button name="button" value="1">1</button>
+                <button name="button" value="2">2</button>
+                <button name="button" value="3">3</button>
+                <button name="button" value="-">−</button>
+
+                <button name="button" value="C">C</button>
+                <button name="button" value="0">0</button>
+                <button name="button" value="=">=</button>
+                <button name="button" value="+">+</button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="history">
+
+        <div class="history-header">
+            <h2>Recent History</h2>
+
+            <a href="/clear-history"
+               class="clear-btn">
+               Clear
+            </a>
+        </div>
+
+        {% if history %}
+
+            {% for item in history %}
+
+            <div class="history-item">
+                {{ item[0] }} = {{ item[1] }}
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>No calculations yet.</p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
